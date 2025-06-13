@@ -1,11 +1,7 @@
-plugins {
-    kotlin("jvm") version "2.1.0" apply false
-}
+// build.gradle.kts
 
-subprojects {
+allprojects {
     repositories {
         mavenCentral()
     }
-    group = "com.example.plos"
-    version = "0.1.0"
 }
