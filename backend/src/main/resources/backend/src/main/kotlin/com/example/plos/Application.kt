@@ -1,4 +1,4 @@
-package com.example.plos
+package com.pattiti.plos
 
 import com.typesafe.config.ConfigFactory
 import io.ktor.server.engine.*

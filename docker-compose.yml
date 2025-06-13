@@ -3,13 +3,26 @@ services:
     image: postgres:15
     restart: always
     environment:
+      POSTGRES_DB: plos
       POSTGRES_USER: plos
       POSTGRES_PASSWORD: secret
-      POSTGRES_DB: plos_dev
     ports:
       - "5432:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    environment:
+      JDBC_URL: jdbc:postgresql://db:5432/plos
+      DB_USER: plos
+      DB_PASS: secret
+    ports:
+      - "8080:8080"
 
 volumes:
   db-data:
