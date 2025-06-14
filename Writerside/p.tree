@@ -6,6 +6,7 @@
                  name="plOS"
                  start-page="plos.md">
 
+    <toc-element topic="notes-for-later.md"/>
     <toc-element topic="plos.md"/>
     <toc-element topic="Playbook.md"/>
 </instance-profile>
