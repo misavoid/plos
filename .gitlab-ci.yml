@@ -1,7 +1,6 @@
 # .gitlab-ci.yml
 stages:
-  - build
-  - test
+  - build-and-test
 
 variables:
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
@@ -9,24 +8,19 @@ variables:
 before_script:
   - echo "Using Java $(java -version 2>&1 | head -n1)"
 
-build-backend:
+build-and-test:
   tags:
     - gradle
   image: gradle:8.5-jdk17
-  stage: build
+  stage: build-and-test
   script:
-    - gradle clean assemble --warning-mode=none
+    # switch into your backend folder (where kotlin("jvm") version "…" is applied)
+    - cd backend
+
+    # drop any old outputs, compile, jar, and run your Testcontainers tests
+    - gradle clean assemble test --warning-mode=none
   artifacts:
+    # path is relative to the project root, so:
     paths:
       - backend/build/libs/*.jar
     expire_in: 1 week
-
-test-backend:
-  tags:
-    - gradle
-  image: gradle:8.5-jdk17
-  stage: test
-  dependencies:
-    - build-backend
-  script:
-    - gradle test --warning-mode=none
