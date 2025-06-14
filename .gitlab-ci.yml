@@ -15,10 +15,11 @@ build-backend:
   image: gradle:8.5-jdk17
   stage: build
   script:
-    - gradle :backend:clean :backend:build --warning-mode=none
+      - chmod +x ./gradlew          # make sure the wrapper is executable
+      - ./gradlew clean build --warning-mode=none
   artifacts:
-    paths:
-      - backend/build/libs/*.jar
+      paths:
+        - backend/build/libs/*.jar
 
 test-backend:
   image: gradle:8.5-jdk17
