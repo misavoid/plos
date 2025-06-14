@@ -10,6 +10,8 @@ before_script:
   - echo "Using Java $(java -version 2>&1 | head -n1)"
 
 build-backend:
+  tags:
+    - gradle
   image: gradle:8.5-jdk17
   stage: build
   script:
