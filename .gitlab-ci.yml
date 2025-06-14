@@ -3,12 +3,13 @@ stages:
   - build-and-test
 
 build-and-test:
-  tags: [gradle]
+  tags:
+    - gradle
   image: gradle:8.5-jdk17
   stage: build-and-test
   script:
     - cd backend
-    - gradle clean build --warning-mode=none
+    - gradle build --warning-mode=none
   artifacts:
     paths:
       - backend/build/libs/*.jar
