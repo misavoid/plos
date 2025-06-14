@@ -1,0 +1,25 @@
+# .gitlab-ci.yml
+stages:
+  - build
+  - test
+
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+before_script:
+  - echo "Using Java $(java -version 2>&1 | head -n1)"
+
+build-backend:
+  image: gradle:8.5-jdk17
+  stage: build
+  script:
+    - gradle :backend:clean :backend:build --warning-mode=none
+  artifacts:
+    paths:
+      - backend/build/libs/*.jar
+
+test-backend:
+  image: gradle:8.5-jdk17
+  stage: test
+  script:
+    - gradle :backend:test --warning-mode=none
