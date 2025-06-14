@@ -15,7 +15,7 @@ build-backend:
   image: gradle:8.5-jdk17
   stage: build
   script:
-    - gradle :backend:build --warning-mode=none
+    - gradle -p backend build --warning-mode=none
   artifacts:
       paths:
         - backend/build/libs/*.jar
@@ -26,4 +26,4 @@ test-backend:
   image: gradle:8.5-jdk17
   stage: test
   script:
-    - gradle :backend:test --warning-mode=none
+    - gradle -p backend test --warning-mode=none
