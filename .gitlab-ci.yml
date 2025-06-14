@@ -2,25 +2,14 @@
 stages:
   - build-and-test
 
-variables:
-  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
-
-before_script:
-  - echo "Using Java $(java -version 2>&1 | head -n1)"
-
 build-and-test:
-  tags:
-    - gradle
+  tags: [gradle]
   image: gradle:8.5-jdk17
   stage: build-and-test
   script:
-    # switch into your backend folder (where kotlin("jvm") version "…" is applied)
     - cd backend
-
-    # drop any old outputs, compile, jar, and run your Testcontainers tests
-    - gradle clean assemble test --warning-mode=none
+    - gradle clean build --warning-mode=none
   artifacts:
-    # path is relative to the project root, so:
     paths:
       - backend/build/libs/*.jar
-    expire_in: 1 week
+    expire_in: "1 week"
