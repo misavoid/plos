@@ -15,7 +15,7 @@ build-backend:
   image: gradle:8.5-jdk17
   stage: build
   script:
-    - gradle -p backend clean build --warning-mode=none
+    - gradle clean :backend:build --warning-mode=none
   artifacts:
       paths:
         - backend/build/libs/*.jar
