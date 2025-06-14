@@ -15,9 +15,7 @@ build-backend:
   image: gradle:8.5-jdk17
   stage: build
   script:
-    # 1) Clean any old outputs
-    # 2) Assemble the backend JAR
-    - gradle -p backend clean assemble --warning-mode=none
+    - gradle clean assemble --warning-mode=none
   artifacts:
     paths:
       - backend/build/libs/*.jar
@@ -31,5 +29,4 @@ test-backend:
   dependencies:
     - build-backend
   script:
-    # Run your Testcontainers + JUnit5 tests
-    - gradle -p backend test --warning-mode=none
+    - gradle test --warning-mode=none
