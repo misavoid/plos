@@ -21,6 +21,8 @@ build-backend:
         - backend/build/libs/*.jar
 
 test-backend:
+  tags:
+    - gradle
   image: gradle:8.5-jdk17
   stage: test
   script:
